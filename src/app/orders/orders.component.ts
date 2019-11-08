@@ -12,6 +12,7 @@ import { Http } from '@angular/http';
 export class OrdersComponent implements OnInit {
 
   orders: Array<any> = [];
+  name = '';
 
   constructor(
     private router: Router,
@@ -22,6 +23,82 @@ export class OrdersComponent implements OnInit {
 
   async ngOnInit() {
 
+  }
+
+  calculate() {
+    if (this.name === '') {
+      alert('Name must not be empty!');
+    } else if (this.name.indexOf(',') === -1) {
+      alert('Must have a comma!');
+    } else {
+      let subTotal, total, taxAmount;
+      total = this.orders.reduce((acc, it, i, arr) => {
+        acc += it.price * it.quantity;
+        let tax = .10;
+        let taxAmount = tax * acc;
+        let grandTotal = (acc * tax) + acc;
+        alert(`Thank you for your order, ${this.name}. Your subtotoal is ${acc}. Your tax amount is ${taxAmount}. Your grand total is ${grandTotal}.`);
+        return acc;
+      }, 0);
+    }
+  }
+
+  loadItems() {
+    this.orders = [{
+      "pid": "1",
+      "image": "assets/sm_android.jpeg",
+      "description": "Android",
+      "price": 150.00,
+      "quantity": 2
+    }, {
+      "pid": "2",
+      "image": "assets/sm_iphone.jpeg",
+      "description": "IPhone",
+      "price": 200.00,
+      "quantity": 1
+    }, {
+      "pid": "3",
+      "image": "assets/sm_windows.jpeg",
+      "description": "Windows Phone",
+      "price": 110.00,
+      "quantity": 2
+    }]
+  }
+
+  addItems(item: string) {
+    if (item === 'android') {
+      this.orders.unshift({
+        "pid": "1",
+        "image": "assets/sm_android.jpeg",
+        "description": "Android",
+        "price": 150.00,
+        "quantity": 2
+      });
+    } else if (item === 'iphone') {
+      this.orders.unshift({
+        "pid": "2",
+        "image": "assets/sm_iphone.jpeg",
+        "description": "IPhone",
+        "price": 200.00,
+        "quantity": 1
+      })
+    } else if (item === 'windows') {
+      this.orders.unshift({
+        "pid": "3",
+        "image": "assets/sm_windows.jpeg",
+        "description": "Windows Phone",
+        "price": 110.00,
+        "quantity": 2
+      })
+    }
+  }
+
+  delete(index: number) {
+    this.orders.splice(index, 1);
+  }
+
+  clear() {
+    this.orders = [];
   }
 
 }

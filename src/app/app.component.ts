@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  help(){
+    alert("Created by Chue Vang")
+  }
 
 }
