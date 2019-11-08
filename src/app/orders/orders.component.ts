@@ -37,7 +37,7 @@ export class OrdersComponent implements OnInit {
         let tax = .10;
         let taxAmount = tax * acc;
         let grandTotal = (acc * tax) + acc;
-        alert(`Thank you for your order, ${this.name}. Your subtotoal is ${acc}. Your tax amount is ${taxAmount}. Your grand totoal is ${grandTotal}.`);
+        alert(`Thank you for your order, ${this.name}. Your subtotoal is ${acc}. Your tax amount is ${taxAmount}. Your grand total is ${grandTotal}.`);
         return acc;
       }, 0);
     }
